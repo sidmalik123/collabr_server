@@ -3,6 +3,7 @@ package collabr.resources;
 import collabr.core.User;
 import collabr.db.UserDAO;
 import com.codahale.metrics.annotation.Timed;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class AdminResource {
     private UserDAO userDAO;
 
+    @Inject
     public AdminResource(UserDAO userDAO){
         this.userDAO = userDAO;
     }

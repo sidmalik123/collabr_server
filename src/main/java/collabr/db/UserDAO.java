@@ -1,6 +1,7 @@
 package collabr.db;
 
 import collabr.core.User;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class UserDAO extends AbstractDAO<User> {
 
+    @Inject
     public UserDAO(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
