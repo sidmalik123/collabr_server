@@ -4,7 +4,7 @@ import collabr.core.User;
 import collabr.resources.AdminResource;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import guice_modules.ServerModule;
+import collabr.guice_modules.ServerModule;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;

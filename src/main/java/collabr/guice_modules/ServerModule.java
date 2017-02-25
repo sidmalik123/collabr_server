@@ -1,4 +1,4 @@
-package guice_modules;
+package collabr.guice_modules;
 
 
 import com.google.inject.AbstractModule;
