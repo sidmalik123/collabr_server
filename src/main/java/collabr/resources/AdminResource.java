@@ -14,9 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by sidmalik on 2017-02-14.
- */
+
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class AdminResource {
@@ -40,6 +38,7 @@ public class AdminResource {
     @Timed
     @UnitOfWork
     public List<User> returnAllUsers(){
+
         return userDAO.findAll();
     }
 }

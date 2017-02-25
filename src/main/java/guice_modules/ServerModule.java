@@ -1,13 +1,9 @@
 package guice_modules;
 
-import collabr.CollabrConfiguration;
-import collabr.core.User;
-import collabr.db.UserDAO;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.ProvisionException;
-import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.hibernate.HibernateBundle;
 import org.hibernate.SessionFactory;
 
 

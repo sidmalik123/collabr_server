@@ -110,14 +110,6 @@
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-db:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jdbc:8.5.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.5.3" level="project" />
-    <orderEntry type="library" name="Maven: com.hubspot.dropwizard:dropwizard-guice:0.7.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.inject.extensions:guice-servlet:3.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey.contribs:jersey-guice:1.18.1" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-servlet:1.18.1" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-server:1.18.1" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.18.1" level="project" />
-    <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.8" level="project" />
-    <orderEntry type="library" name="Maven: javassist:javassist:3.12.1.GA" level="project" />
     <orderEntry type="library" name="Maven: com.google.inject:guice:3.0" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
