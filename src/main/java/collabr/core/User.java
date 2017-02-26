@@ -1,6 +1,9 @@
 package collabr.core;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -16,52 +19,62 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @NotBlank
+    private String fname;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @NotBlank
+    private String lname;
 
-    @Column(name = "e_mail")
+    @NotBlank
+    @Column(unique = true)
     private String email;
 
-//    private int hashPassword;
+    @NotBlank
+    @Column(name = "hash_password")
+    private int hashPassword;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "last_login")
+    private Date lastLogin;
+
+    private boolean validated;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, int hashPassword) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String fname, String lname, String email, int hashPassword) {
+        this.fname = fname;
+        this.lname = lname;
         this.email = email;
-//        this.hashPassword = hashPassword;
+        this.hashPassword = hashPassword;
     }
-    // Auto-generated equald, hashCode, getters and setters.
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFname() {
+        return fname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLname() {
+        return lname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
     public String getEmail() {
@@ -72,13 +85,29 @@ public class User {
         this.email = email;
     }
 
-//    public int getPassword() {
-//        return hashPassword;
-//    }
-//
-//    public void setPassword(int hashPassword) {
-//        this.hashPassword = hashPassword;
-//    }
+    public int getHashPassword() {
+        return hashPassword;
+    }
+
+    public void setHashPassword(int hashPassword) {
+        this.hashPassword = hashPassword;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
 
     public int hashPassword(String password){
         return password.hashCode();

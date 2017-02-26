@@ -6,13 +6,13 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
 
+import javax.validation.Valid;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Path("/")
@@ -26,19 +26,18 @@ public class AdminResource {
     }
 
     @GET
-    @Timed
-    public Map<String, String> sayHello() {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("Greeting", "Good Evening!");
-        return map;
-    }
-
-    @GET
     @Path("/users")
     @Timed
     @UnitOfWork
     public List<User> returnAllUsers(){
-
         return userDAO.findAll();
+    }
+
+    @POST
+    @Path("create/user")
+    @Timed
+    @UnitOfWork
+    public void createUser(@Valid User user){
+        userDAO.saveOrUpdate(user);
     }
 }
