@@ -39,7 +39,7 @@ public class User {
     @Column(name = "is_validated")
     private boolean isValidated;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Project> projects = new ArrayList<Project>();
 
     public User() {
