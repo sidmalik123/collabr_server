@@ -36,7 +36,8 @@ public class User {
     @Column(name = "last_login")
     private DateTime lastLogin;
 
-    private boolean validated;
+    @Column(name = "is_validated")
+    private boolean isValidated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Project> projects = new ArrayList<Project>();
@@ -123,11 +124,11 @@ public class User {
     }
 
     public boolean isValidated() {
-        return validated;
+        return isValidated;
     }
 
     public void setValidated(boolean validated) {
-        this.validated = validated;
+        isValidated = validated;
     }
 
     public List<Project> getProjects() {

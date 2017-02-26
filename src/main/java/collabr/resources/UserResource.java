@@ -2,6 +2,7 @@ package collabr.resources;
 
 import collabr.core.User;
 import collabr.db.UserDAO;
+import collabr.services.UserService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -18,12 +19,12 @@ import java.util.List;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
-public class AdminResource {
-    private UserDAO userDAO;
+public class UserResource {
+    private UserService userService;
 
     @Inject
-    public AdminResource(UserDAO userDAO){
-        this.userDAO = userDAO;
+    public UserResource(UserService userService){
+        this.userService = userService;
     }
 
     @GET
@@ -31,7 +32,7 @@ public class AdminResource {
     @Timed
     @UnitOfWork
     public List<User> returnAllUsers(){
-        return userDAO.findAll();
+        return userService.getAllUsers();
     }
 
     @POST
@@ -39,8 +40,6 @@ public class AdminResource {
     @Timed
     @UnitOfWork
     public void createUser(@Valid User user){
-        user.setCreatedAt(new DateTime());
-        user.setValidated(true);
-        userDAO.saveOrUpdate(user);
+        userService.createUser(user);
     }
 }

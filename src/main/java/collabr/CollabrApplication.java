@@ -2,8 +2,7 @@ package collabr;
 
 import collabr.core.Project;
 import collabr.core.User;
-import collabr.resources.AdminResource;
-import collabr.resources.ProjectResource;
+import collabr.resources.UserResource;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import collabr.guice_modules.ServerModule;
@@ -44,8 +43,8 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
     public void run(final CollabrConfiguration configuration, final Environment environment) {
         ServerModule serverModule = new ServerModule(hibernateBundle.getSessionFactory());
         Injector injector = Guice.createInjector(serverModule);
-        environment.jersey().register(injector.getInstance(AdminResource.class));
-        environment.jersey().register(injector.getInstance(ProjectResource.class));
+        environment.jersey().register(injector.getInstance(UserResource.class));
+//        environment.jersey().register(injector.getInstance(ProjectResource.class));
     }
 
 }

@@ -13,26 +13,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/projects")
-@Produces(MediaType.APPLICATION_JSON)
-public class ProjectResource {
-
-    private UserDAO userDAO;
-
-    @Inject
-    public ProjectResource(UserDAO userDAO){
-        this.userDAO = userDAO;
-    }
-
-    @POST
-    @Path("/create")
-    @Timed
-    @UnitOfWork
-    public void createProject(@Valid Project project){
-        User user = userDAO.findyId(1);
-        user.addProject(project);
-        project.setUser(user);
-        userDAO.saveOrUpdate(user);
-    }
-
-}
+//@Path("/projects")
+//@Produces(MediaType.APPLICATION_JSON)
+//public class ProjectResource {
+//
+//
+//
+//}
