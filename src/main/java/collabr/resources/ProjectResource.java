@@ -1,46 +1,38 @@
 package collabr.resources;
 
+import collabr.core.Project;
 import collabr.core.User;
 import collabr.db.UserDAO;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
-import org.joda.time.DateTime;
 
 import javax.validation.Valid;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
-
-@Path("/")
+@Path("/projects")
 @Produces(MediaType.APPLICATION_JSON)
-public class AdminResource {
+public class ProjectResource {
+
     private UserDAO userDAO;
 
     @Inject
-    public AdminResource(UserDAO userDAO){
+    public ProjectResource(UserDAO userDAO){
         this.userDAO = userDAO;
     }
 
-    @GET
-    @Path("/users")
-    @Timed
-    @UnitOfWork
-    public List<User> returnAllUsers(){
-        return userDAO.findAll();
-    }
-
     @POST
-    @Path("create/user")
+    @Path("/create")
     @Timed
     @UnitOfWork
-    public void createUser(@Valid User user){
-        user.setCreatedAt(new DateTime());
-        user.setValidated(true);
+    public void createProject(@Valid Project project){
+        User user = userDAO.findyId(1);
+        user.addProject(project);
+        project.setUser(user);
         userDAO.saveOrUpdate(user);
     }
+
 }

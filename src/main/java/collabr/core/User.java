@@ -1,20 +1,16 @@
 package collabr.core;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
 @Table(name = "Users")
-@NamedQueries({
-        @NamedQuery(name = "com.mates.core.Users.findAll",
-                query = "select e from User e"),
-        @NamedQuery(name = "com.mates.core.Users.findByEmail",
-                query = "select e from User e "
-                        + "where e.email like :email ")
-})
 public class User {
 
     @Id
@@ -31,17 +27,19 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotBlank
     @Column(name = "hash_password")
     private int hashPassword;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private DateTime createdAt;
 
     @Column(name = "last_login")
-    private Date lastLogin;
+    private DateTime lastLogin;
 
     private boolean validated;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Project> projects = new ArrayList<Project>();
 
     public User() {
     }
@@ -51,6 +49,13 @@ public class User {
         this.lname = lname;
         this.email = email;
         this.hashPassword = hashPassword;
+    }
+
+    public User(User user){
+        this.fname = user.getFname();
+        this.lname = user.getLname();
+        this.hashPassword = user.getHashPassword();
+        this.email = user.getEmail();
     }
 
     public int getId() {
@@ -93,23 +98,43 @@ public class User {
         this.hashPassword = hashPassword;
     }
 
-    public Date getCreatedAt() {
+    public DateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(DateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getLastLogin() {
+    public DateTime getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(DateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
 
     public int hashPassword(String password){
         return password.hashCode();
+    }
+
+    public void addProject(Project project){
+        projects.add(project);
+    }
+
+    public boolean isValidated() {
+        return validated;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

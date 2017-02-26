@@ -1,7 +1,9 @@
 package collabr;
 
+import collabr.core.Project;
 import collabr.core.User;
 import collabr.resources.AdminResource;
+import collabr.resources.ProjectResource;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import collabr.guice_modules.ServerModule;
@@ -23,7 +25,7 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
     }
 
     private final HibernateBundle<CollabrConfiguration> hibernateBundle
-            = new HibernateBundle<CollabrConfiguration>(User.class){
+            = new HibernateBundle<CollabrConfiguration>(User.class, Project.class){
         @Override
         public DataSourceFactory getDataSourceFactory(
                 CollabrConfiguration configuration
@@ -43,6 +45,7 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
         ServerModule serverModule = new ServerModule(hibernateBundle.getSessionFactory());
         Injector injector = Guice.createInjector(serverModule);
         environment.jersey().register(injector.getInstance(AdminResource.class));
+        environment.jersey().register(injector.getInstance(ProjectResource.class));
     }
 
 }
