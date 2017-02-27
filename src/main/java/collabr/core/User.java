@@ -4,9 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -41,6 +39,13 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Project> projects = new ArrayList<Project>();
+
+    @ManyToMany(fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_skill_junction",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+    )
+    Set<Skill> skills = new HashSet<Skill>();
 
     public User() {
     }
@@ -137,5 +142,17 @@ public class User {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public void addSkill(Skill skill){
+        skills.add(skill);
     }
 }

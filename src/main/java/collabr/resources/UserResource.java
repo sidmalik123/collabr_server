@@ -1,5 +1,6 @@
 package collabr.resources;
 
+import collabr.core.Skill;
 import collabr.core.User;
 import collabr.db.UserDAO;
 import collabr.services.UserService;
@@ -17,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 
-@Path("/")
+@Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
     private UserService userService;
@@ -28,7 +29,6 @@ public class UserResource {
     }
 
     @GET
-    @Path("/users")
     @Timed
     @UnitOfWork
     public List<User> returnAllUsers(){
@@ -36,10 +36,20 @@ public class UserResource {
     }
 
     @POST
-    @Path("create/user")
+    @Path("create")
     @Timed
     @UnitOfWork
     public void createUser(@Valid User user){
         userService.createUser(user);
     }
+
+    @POST
+    @Path("/add/skill")
+    @Timed
+    @UnitOfWork
+    public void createUser(@Valid Skill skill){
+        userService.addSkill(1, skill);
+    }
+
+
 }
