@@ -9,11 +9,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "Users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class User extends BaseEntity {
 
     @NotBlank
     private String fname;
@@ -62,14 +58,6 @@ public class User {
         this.lname = user.getLname();
         this.hashPassword = user.getHashPassword();
         this.email = user.getEmail();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFname() {

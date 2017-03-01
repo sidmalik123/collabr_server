@@ -7,11 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "skills")
-public class Skill {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Skill extends BaseEntity {
 
     @NotBlank
     private String name;
@@ -22,14 +18,6 @@ public class Skill {
 
     public Skill(String name){
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -12,10 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "projects")
-public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Project extends BaseEntity {
 
     @NotBlank
     private String name;
@@ -49,14 +46,6 @@ public class Project {
         this.description = description;
         this.peopleRequired = peopleRequired;
         this.user = user;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
