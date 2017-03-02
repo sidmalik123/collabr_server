@@ -43,6 +43,9 @@ public class User extends BaseEntity {
     )
     Set<Skill> skills = new HashSet<Skill>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Match> matches = new ArrayList<Match>();
+
     public User() {
     }
 
@@ -142,5 +145,13 @@ public class User extends BaseEntity {
 
     public void addSkill(Skill skill){
         skills.add(skill);
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 }

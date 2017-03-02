@@ -7,7 +7,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.annotation.Nonnegative;
 import javax.persistence.*;
 import javax.ws.rs.Produces;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,6 +38,9 @@ public class Project extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     Set<Skill> skills = new HashSet<Skill>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.REMOVE)
+    private List<Match> matches = new ArrayList<Match>();
 
     public Project(){
 
@@ -90,5 +95,13 @@ public class Project extends BaseEntity {
 
     public void addSkill(Skill skill){
         skills.add(skill);
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 }

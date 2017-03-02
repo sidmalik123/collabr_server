@@ -1,8 +1,10 @@
 package collabr;
 
+import collabr.core.Match;
 import collabr.core.Project;
 import collabr.core.Skill;
 import collabr.core.User;
+import collabr.resources.MatchResource;
 import collabr.resources.ProjectResource;
 import collabr.resources.SkillResource;
 import collabr.resources.UserResource;
@@ -27,7 +29,7 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
     }
 
     private final HibernateBundle<CollabrConfiguration> hibernateBundle
-            = new HibernateBundle<CollabrConfiguration>(User.class, Project.class, Skill.class){
+            = new HibernateBundle<CollabrConfiguration>(User.class, Project.class, Skill.class, Match.class){
         @Override
         public DataSourceFactory getDataSourceFactory(
                 CollabrConfiguration configuration
@@ -49,6 +51,7 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
         environment.jersey().register(injector.getInstance(UserResource.class));
         environment.jersey().register(injector.getInstance(ProjectResource.class));
         environment.jersey().register(injector.getInstance(SkillResource.class));
+        environment.jersey().register(injector.getInstance(MatchResource.class));
     }
 
 }

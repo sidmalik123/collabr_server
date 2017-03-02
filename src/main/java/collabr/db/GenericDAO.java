@@ -60,6 +60,4 @@ public class GenericDAO<E> extends AbstractDAO<E> {
         Criteria criteria = criteria();
         return list(criteria);
     }
-
-
 }
