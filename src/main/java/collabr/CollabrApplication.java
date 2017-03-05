@@ -11,6 +11,7 @@ import collabr.resources.UserResource;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import collabr.guice_modules.ServerModule;
+import infra.security.AuthenticationFilter;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -52,6 +53,7 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
         environment.jersey().register(injector.getInstance(ProjectResource.class));
         environment.jersey().register(injector.getInstance(SkillResource.class));
         environment.jersey().register(injector.getInstance(MatchResource.class));
+        environment.jersey().register(injector.getInstance(AuthenticationFilter.class));
     }
 
 }

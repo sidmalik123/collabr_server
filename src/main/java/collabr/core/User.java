@@ -1,5 +1,6 @@
 package collabr.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.DateTime;
 
@@ -22,7 +23,7 @@ public class User extends BaseEntity {
     private String email;
 
     @Column(name = "hash_password")
-    private int hashPassword;
+    private String hashPassword;
 
     @Column(name = "created_at")
     private DateTime createdAt;
@@ -34,6 +35,7 @@ public class User extends BaseEntity {
     private boolean isValidated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<Project> projects = new ArrayList<Project>();
 
     @ManyToMany(fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
@@ -44,12 +46,13 @@ public class User extends BaseEntity {
     Set<Skill> skills = new HashSet<Skill>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<Match> matches = new ArrayList<Match>();
 
     public User() {
     }
 
-    public User(String fname, String lname, String email, int hashPassword) {
+    public User(String fname, String lname, String email, String hashPassword) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
@@ -87,11 +90,11 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public int getHashPassword() {
+    public String getHashPassword() {
         return hashPassword;
     }
 
-    public void setHashPassword(int hashPassword) {
+    public void setHashPassword(String hashPassword) {
         this.hashPassword = hashPassword;
     }
 

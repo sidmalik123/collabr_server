@@ -6,10 +6,11 @@ import collabr.core.User;
 import collabr.db.SkillDAO;
 import collabr.db.UserDAO;
 import com.google.inject.Inject;
+import infra.security.CollabrSecurity;
 import org.joda.time.DateTime;
 
-import javax.validation.Valid;
 import java.util.List;
+
 
 public class UserService {
 
@@ -26,8 +27,10 @@ public class UserService {
         return userDAO.findAll();
     }
 
-    public void createUser(@Valid User user){
+    public void createUser(User user){
         user.setCreatedAt(new DateTime());
+        String hashedPassword = CollabrSecurity.hash(user.getHashPassword());
+        user.setHashPassword(hashedPassword);
         userDAO.saveOrUpdate(user);
     }
 
@@ -37,4 +40,27 @@ public class UserService {
         user.addSkill(skill1);
         userDAO.saveOrUpdate(user);
     }
+
+    public String loginUser(String email, String password) {
+        String hashedPassword = CollabrSecurity.hash(password);
+        User user = userDAO.findByEmail(email);
+        if (user == null ){
+
+        }
+        if (!user.getHashPassword().equals(hashedPassword)){
+            // invalid password
+        }
+
+        // issue a token
+        String token = null;
+        try {
+            token = CollabrSecurity.encrypt(user.getEmail());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return token;
+
+    }
+
+
 }

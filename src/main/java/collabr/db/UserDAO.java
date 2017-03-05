@@ -16,9 +16,9 @@ public class UserDAO extends GenericDAO<User> {
         super(sessionFactory);
     }
 
-    public List<User> findByEmail(String email) {
+    public User findByEmail(String email) {
         Criteria criteria = criteria();
         criteria.add(Restrictions.eq("email", email));
-        return list(criteria);
+        return uniqueResult(criteria);
     }
 }
