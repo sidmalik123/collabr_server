@@ -2,4 +2,4 @@
 target/
 dependency-reduced-pom.xml
 collabr.yml
-src/main/java/infra/security
+src/main/java/collabr/infra

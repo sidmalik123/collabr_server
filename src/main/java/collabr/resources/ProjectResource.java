@@ -15,7 +15,7 @@ import java.util.List;
 
 @Path("/projects")
 @Produces(MediaType.APPLICATION_JSON)
-public class ProjectResource {
+public class ProjectResource extends CollabrResource {
 
     private ProjectService projectService;
 

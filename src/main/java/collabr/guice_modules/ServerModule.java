@@ -15,9 +15,7 @@ public class ServerModule extends AbstractModule{
     }
 
     @Override
-    protected void configure() {
-//        bind(UserDAO.class).to(UserDAO.class);
-    }
+    protected void configure() { }
 
     @Provides
     SessionFactory provideSessionFactory(){

@@ -4,14 +4,11 @@ import collabr.core.Match;
 import collabr.core.Project;
 import collabr.core.Skill;
 import collabr.core.User;
-import collabr.resources.MatchResource;
-import collabr.resources.ProjectResource;
-import collabr.resources.SkillResource;
-import collabr.resources.UserResource;
+import collabr.resources.*;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import collabr.guice_modules.ServerModule;
-import infra.security.AuthenticationFilter;
+import collabr.infra.AuthenticationFilter;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -49,6 +46,7 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
     public void run(final CollabrConfiguration configuration, final Environment environment) {
         ServerModule serverModule = new ServerModule(hibernateBundle.getSessionFactory());
         Injector injector = Guice.createInjector(serverModule);
+        environment.jersey().register(injector.getInstance(BaseResource.class));
         environment.jersey().register(injector.getInstance(UserResource.class));
         environment.jersey().register(injector.getInstance(ProjectResource.class));
         environment.jersey().register(injector.getInstance(SkillResource.class));

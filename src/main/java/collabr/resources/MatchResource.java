@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/match")
 @Produces(MediaType.APPLICATION_JSON)
-public class MatchResource {
+public class MatchResource extends CollabrResource {
 
     private MatchService matchService;
 
