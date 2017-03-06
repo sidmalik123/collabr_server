@@ -4,7 +4,8 @@ import collabr.core.Match;
 import collabr.core.Project;
 import collabr.core.Skill;
 import collabr.core.User;
-import collabr.infra.InvalidEntityToResponseMapper;
+import collabr.infra.ExceptionToResponseMapper;
+import collabr.infra.InvalidEntityException;
 import collabr.resources.*;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -66,7 +67,8 @@ public class CollabrApplication extends Application<CollabrConfiguration> {
     }
 
     private void configureExceptionMappers(final Environment environment){
-        environment.jersey().register(new InvalidEntityToResponseMapper());
+        environment.jersey().register(new ExceptionToResponseMapper<InvalidEntityException>() {
+        });
     }
 
 }
