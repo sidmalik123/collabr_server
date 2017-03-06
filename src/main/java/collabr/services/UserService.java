@@ -9,6 +9,7 @@ import com.google.inject.Inject;
 import collabr.infra.CollabrSecurity;
 import org.joda.time.DateTime;
 
+import javax.ws.rs.NotFoundException;
 import java.util.Date;
 import java.util.List;
 
@@ -45,11 +46,9 @@ public class UserService {
     public String loginUser(String email, String password) {
         String hashedPassword = CollabrSecurity.hash(password);
         User user = userDAO.findByEmail(email);
-        if (user == null ){
-            // no such user
-        }
-        if (!user.getHashPassword().equals(hashedPassword)){
-            // invalid password
+        if ( user == null || !user.getHashPassword().equals(hashedPassword) ){
+            // no such user || password does not match
+            throw new NotFoundException("user not found");
         }
 
         // issue a token

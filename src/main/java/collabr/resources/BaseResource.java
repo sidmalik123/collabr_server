@@ -2,6 +2,7 @@ package collabr.resources;
 
 import collabr.core.User;
 import collabr.core.UserCredentials;
+import collabr.infra.InvalidEntityException;
 import collabr.services.UserService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
