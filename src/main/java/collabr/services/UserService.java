@@ -55,7 +55,7 @@ public class UserService {
         String token = null;
         try {
             DateTime lastLoginTime = new DateTime();
-            token = CollabrSecurity.encrypt(user.getEmail() + lastLoginTime.toString());
+            token = CollabrSecurity.encrypt(user.getEmail() + "^" + lastLoginTime.toString());
             user.setLastLogin(lastLoginTime);
         } catch (Exception e) {
             e.printStackTrace();

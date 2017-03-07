@@ -51,7 +51,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             String decryptedToken = CollabrSecurity.decrypt(token);
             Session session = sessionFactory.openSession();
             ManagedSessionContext.bind(session);
-            User user = userDAO.findByEmail(decryptedToken);
+            String email = decryptedToken.substring(0, decryptedToken.indexOf("^"));
+            User user = userDAO.findByEmail(email);
             session.close();
             if (user != null){
                 CollabrContext collabrContext = new CollabrContext(user.getId());
@@ -76,12 +77,14 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                         return null;
                     }
                 });
+                return;
             }
-            return;
+            throw new NotAuthorizedException("token validation failed");
+
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new NotAuthorizedException("token validation failed");
         }
 
-        throw new NotAuthorizedException("token validation failed");
+
     }
 }
