@@ -65,4 +65,10 @@ public class UserService {
     }
 
 
+    public void deleteUser(int userId) {
+        User user = userDAO.findyId(userId);
+        user.setSkills(null);
+        userDAO.delete(user);
+
+    }
 }

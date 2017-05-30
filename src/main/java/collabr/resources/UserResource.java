@@ -4,6 +4,7 @@ import collabr.aspect.Secured;
 import collabr.core.Skill;
 import collabr.core.User;
 import collabr.core.UserCredentials;
+import collabr.infra.CollabrContext;
 import collabr.services.UserService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
@@ -11,10 +12,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.annotation.security.PermitAll;
 import javax.validation.Valid;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -36,6 +34,14 @@ public class UserResource extends CollabrResource{
     @UnitOfWork
     public List<User> returnAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @DELETE
+    @Timed
+    @UnitOfWork
+    public void deleteCurrentUser() {
+        CollabrContext collabrContext = getCollabrContext();
+        userService.deleteUser(collabrContext.getCurrentUserId());
     }
 
 }

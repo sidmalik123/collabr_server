@@ -30,12 +30,11 @@ public class BaseResource {
     @Path("create")
     @Timed
     @UnitOfWork
-    @PermitAll
     public void createUser(@Valid User user){
         userService.createUser(user);
     }
 
-    @PermitAll
+
     @POST
     @Timed
     @UnitOfWork

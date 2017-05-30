@@ -60,4 +60,8 @@ public class GenericDAO<E> extends AbstractDAO<E> {
         Criteria criteria = criteria();
         return list(criteria);
     }
+
+    public void delete(E entity) {
+        currentSession().delete(entity);
+    }
 }

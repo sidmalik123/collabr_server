@@ -1,5 +1,6 @@
 package collabr.resources;
 
+import collabr.aspect.Secured;
 import collabr.core.Skill;
 import collabr.infra.CollabrContext;
 import collabr.services.SkillService;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/skills")
 @Produces(MediaType.APPLICATION_JSON)
+@Secured
 public class SkillResource extends CollabrResource{
 
     private SkillService skillService;
